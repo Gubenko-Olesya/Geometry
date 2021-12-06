@@ -4,7 +4,7 @@
 
 int find_next (double x[], double y[], int ind[], int m, int n) //Gubenko Olesya 112
 {
-	int i;
+	int i, buf;
 	double v_x, v_y, w_x, w_y, k=-1, cos;
 	if (n==1) {
 		v_x=1;
@@ -17,10 +17,12 @@ int find_next (double x[], double y[], int ind[], int m, int n) //Gubenko Olesya
 	for (i=n; i<m; i++) {
 		w_x=x[ind[i]]-x[ind[n-1]];
 		w_y=y[ind[i]]-y[ind[n-1]];
-		cos=(v_x*w_x+v_y*w_y)/(sqrt(v_x*v_x+w_x*w_x)*sqrt(v_y*v_y+w_y*w_y));
+		cos=(v_x*w_x+v_y*w_y)/(sqrt(v_x*v_x+v_y*v_y)*sqrt(w_x*w_x+w_y*w_y));
 		if (cos>k) {
 			k=cos;
-			ind[n]=i;
+			buf=ind[n];
+			ind[n]=ind[i];
+			ind[i]=buf;
 		}
 	}
 	//otdelno posle vsekh drugih tochek proveryaem pervuyu tochku
@@ -31,7 +33,5 @@ int find_next (double x[], double y[], int ind[], int m, int n) //Gubenko Olesya
 		ind[n]=ind[0];
 		return n;
 	}
-	if (ind[n]!=n)
-		ind[ind[n]]=n;
 	return n+1;
 }

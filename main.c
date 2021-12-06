@@ -32,7 +32,7 @@ int main(void)		//Gubenko Olesya 112
 
 	fclose(fin);
 
-	n=convex_hull(x, y, ind, SIZE);
+	n=convex_hull(x, y, ind, qty);
 
 	fout=fopen("output.txt", "w");
 	if (fout==NULL) {
@@ -42,6 +42,7 @@ int main(void)		//Gubenko Olesya 112
 
 	for (i=0; i<n; i++)
 		fprintf(fout, "%lf %lf\n", x[ind[i]], y[ind[i]]);
+	fprintf(fout, "%lf %lf\n", x[ind[0]], y[ind[0]]);
 
 	fclose(fout);
 	return 0;
